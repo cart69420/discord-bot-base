@@ -1,5 +1,5 @@
 # discord-bot-base
- bot base for discord
+ bot base for discord, made complicated.
 
 
-any prs would be appreciated
+ any prs would be appreciated

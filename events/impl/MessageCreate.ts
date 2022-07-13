@@ -18,7 +18,8 @@ export default class MessageCreate extends Event {
         if (!command) return;
 
         try {
-            command.execute(new CommandArgs(message, args, client));
+            if (command._info.permission.validate(message.member!))
+                command.execute(new CommandArgs(message, args, client));
         } catch (error) {
             console.error(error);
         }

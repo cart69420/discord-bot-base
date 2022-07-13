@@ -15,10 +15,12 @@ export class PermissionType {
 
 export default class Permissions {
     public static hasPermission(member: GuildMember, permission: PermissionString): boolean {
+        if (!member) return false;
         return member.permissions.has(permission);
     }
 
     public static hasRole(member: GuildMember, role: string): boolean {
+        if (!member) return false;
         return member.roles.cache.find(r => r.name === role) !== undefined;
     }
 
