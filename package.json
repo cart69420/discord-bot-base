@@ -1,0 +1,17 @@
+{
+  "name": "discord-bot-base",
+  "version": "1.0.0",
+  "description": "base",
+  "main": "index.ts",
+  "scripts": {
+    "start": "npm install && ts-node index.ts"
+  },
+  "author": "cart",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "discord.js": "^13.8.1",
+    "dotenv": "^16.0.1",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
+  }
+}
