@@ -1,4 +1,4 @@
-import { Client, Message } from "discord.js";
+import { Client, Message, User } from "discord.js";
 import { Caches } from "..";
 import { PermissionType } from "../api/Permissions";
 
@@ -22,12 +22,14 @@ export class CommandInfo {
     private _description: string;
     private _aliases: string[];
     private _permission: PermissionType;
-    
-    constructor(name: string, description: string, aliases: string[], permission: PermissionType) {
+    private _cooldown: number = 0;
+
+    constructor(name: string, description: string, aliases: string[], permission: PermissionType, cooldown: number = 0) {
         this._name = name;
         this._description = description;
         this._aliases = aliases;
         this._permission = permission;
+        this._cooldown = cooldown;
     }
 
     get name(): string {
@@ -44,6 +46,10 @@ export class CommandInfo {
 
     get permission(): PermissionType {
         return this._permission;
+    }
+
+    get cooldown(): number {
+        return this._cooldown;
     }
 }
 
@@ -68,5 +74,28 @@ export class CommandArgs {
 
     get client(): Client {
         return this._client;
+    }
+}
+
+export class Cooldown {
+    public _user: User;
+    public _command: Command;
+    private time: number;
+    constructor(user: User, command: Command) {
+        this._user = user;
+        this._command = command;
+        this.time = Date.now();
+    }
+
+    passed(): boolean {
+        return Date.now() - this.time >= this._command._info.cooldown;
+    }
+
+    left(): number {
+        return this._command._info.cooldown - (Date.now() - this.time);
+    }
+
+    toString(): string {
+        return `${this._user.id}|${this._command._info.name}|${this._command._info.cooldown}`;
     }
 }

@@ -1,4 +1,5 @@
 import { GuildMember, PermissionString, Snowflake } from "discord.js";
+import { Caches } from "..";
 
 export class PermissionType {
     public _name: string;
@@ -28,5 +29,6 @@ export default class Permissions {
         new PermissionType("DEFAULT", (member: GuildMember) => true);
     public static readonly ADMINISTRATOR: PermissionType = 
         new PermissionType("ADMINISTRATOR", (member: GuildMember) => this.hasPermission(member, "ADMINISTRATOR"));
-
+    public static readonly WHITELIST: PermissionType =
+        new PermissionType("WHITELIST", (member: GuildMember) => Caches.whitelist.includes(member.id));
 }

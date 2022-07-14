@@ -3,7 +3,7 @@ import Permissions from "../../api/Permissions";
 
 export default class TestCommand extends Command {
     constructor() {
-        super(new CommandInfo("test", "Test command", ["test"], Permissions.ADMINISTRATOR));
+        super(new CommandInfo("test", "Test command", ["test"], Permissions.ADMINISTRATOR, 5000));
     }
 
     execute(cargs: CommandArgs): void {

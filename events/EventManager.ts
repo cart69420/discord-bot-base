@@ -3,9 +3,9 @@ import Event from "./Event";
 
 export default class EventManager {
     static init() {
-        const ev = readdirSync("./events/impl").filter(file => file.endsWith(".ts"));
+        const ev = readdirSync(`${__dirname}\\impl`).filter(file => file.endsWith(__filename.split(".")[1]));
         ev.forEach(file => {
-            import(`../events/impl/${file}`).then(module => {
+            import(`${__dirname}\\impl\\${file}`).then(module => {
                 if (Object.keys(module).includes("default")) {
                     const event: Event = new module.default()
                     event.register();

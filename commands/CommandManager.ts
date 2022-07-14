@@ -3,9 +3,9 @@ import { readdirSync } from "fs";
 
 export default class CommandManager {
     static init() {
-        const cmds = readdirSync("./commands/impl").filter(file => file.endsWith(".ts"));
+        const cmds = readdirSync(`${__dirname}\\impl`).filter(file => file.endsWith(__filename.split(".")[1]));
         cmds.forEach(file => {
-            import(`../commands/impl/${file}`).then(module => {
+            import(`${__dirname}\\impl\\${file}`).then(module => {
                 if (Object.keys(module).includes("default")) {
                     const command: Command = new module.default()
                     command.register();
